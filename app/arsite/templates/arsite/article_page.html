@@ -1,0 +1,39 @@
+{% extends 'arsite/home.html' %}
+{% block head %}
+{{ block.super }}
+{% load static %}
+<link rel="stylesheet" href="{% static 'arsite/article_page.css' %}">
+
+{% endblock head %}
+
+
+
+
+{% block content %}
+<div class="start">
+<h1 class='title'>
+    {{article.name}}
+</h1>
+<h3 class='subtitle'>
+    {{article.name}}
+</h3>
+
+<p class='author_date'>by {{article.author}}/ PUBLISHED {{article.updated}}</p>
+</div>
+
+<div class='article_img'>
+    <img class='img'src="{{article.header_image.url}}" alt="">
+</div>
+
+<div class='Article_body'>
+    {{article.body}}
+</div>
+
+
+{% endblock content %}
+
+
+
+
+
+

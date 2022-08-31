@@ -1,0 +1,33 @@
+.category_info {
+    width: 100%;
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.category_info > p {
+    width: 50%;    
+}
+.articles {
+    width: 92%;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(4, 25%);
+    grid-template-rows: repeat(auto, auto);
+    row-gap: 10px;
+    column-gap: 10px;
+}
+.article_block { 
+    min-height: 250px;
+    max-height: 400px;
+}
+.block_info > p, h3 { 
+    margin: 0;
+}
+
+.block_info {
+    width: 90%;
+    margin: 0 auto;
+}
+.img_block {
+    height: 60%;
+}

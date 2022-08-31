@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+
+<html>
+    {% block head %}
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title></title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        {% load static %}
+        <link rel="stylesheet" href="{% static 'arsite/home.css' %}">
+    </head>
+    {% endblock head %}
+    <body>
+       <div class="navbar">
+        
+        <div class='up'>
+            <div class='LOGO plus'>
+                LOGO+
+            </div>
+
+            <div class='LOGO noplus'>
+                LOGO
+            </div>
+            <div class='Search_Slinks'>
+                <div class='Search'>
+
+                </div>
+                <div class='Slinks'>
+
+                </div>
+            </div>
+        </div>
+        <div class='topics'>
+            <div>
+            <p class="topic"> <a href="{% url 'category_page' 'Science' %}">Science</a></p>
+            <p class="topic"><a href="{% url 'category_page' 'Environment' %}">Environment</a></p>
+            <p class="topic"><a href="{% url 'category_page' 'Technology' %}">Technology</a></p>
+            </div>
+        </div>
+
+       </div>
+
+
+       <div class='container'>
+        {% block content %}
+       <div class="Board1">
+           
+                <div class='Large'>
+                    <div class='img_container'>
+                        <img src="{{Scince_block_large1.urlToImage}}" alt="" width=100% height=100%>
+                    </div>
+                    <div class='article_info'>
+                        <h3>{{Scince_block_large1.title}}</h3>
+        
+                        <p>By {{Scince_block_large1.author}}</p>
+                    </div>
+                </div>
+            
+            <div class="smalls">
+            {% for article in Scince_news %}
+            <div class='small'>
+                <div class='small_img_container'>
+                    <img src="{{article.urlToImage}}" alt="" width=100% height=100%>
+                </div>
+                <div class='article_info'>
+                    <h3>{{article.title}}</h3>
+        
+                    <p>By {{article.author}}</p>
+                </div>
+            </div>
+            {% endfor %}
+            </div>
+       </div>
+
+        </div>
+        <section>
+        <div class='blocks'>
+        <div class='science_block'>
+            <div class='bar_name'>Science</div>
+            <div class='articles_block'>
+                <div class='large_block'>
+                    <div class='img_container_block'>
+                    <img src="{{Scince_block_large.urlToImage}}" alt="" width=100% height=100%>
+                    </div>
+                    <div class='article_info_block'>
+                        <h3>{{Scince_block_large.title}}</h3>
+                        <p>By {{Scince_block_large.author}}</p>
+                    </div>  
+                </div>
+                <div class='small_blocks'>
+                    {% for science_article in Scince_block %}
+                    <div class='small_block'>
+                        <h3>{{science_article.title}}</h3>
+                        <p>By {{science_article.author}}</p>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+            <div class='btn_area'>
+                <div class='view_all_btn'>
+                    VIEW ALL
+                </div>
+            </div>
+        </div>
+        <div class='tech_block'>
+            <div class='bar_name'>Tech</div>
+            <div class='articles_block'>
+                <div class='large_block'>
+                    <div class='img_container_block'>
+                        <img src="{{Tech_block_large.urlToImage}}" alt="" width=100% height=100%>
+                        </div>
+                    <div class='article_info_block'>
+                        <h3>{{Tech_block_large.title}}</h3>
+                        <p>By {{Tech_block_large.author}}</p>
+                    </div>  
+                </div>
+                <div class='small_blocks'>
+                    {% for tech_article in Tech_block %}
+                    <div class='small_block'>
+                        <h3>{{tech_article.title}}</h3>
+                        <p>By {{tech_block.author}}</p>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+            <div class='btn_area'>
+                <div class='view_all_btn'>
+                    VIEW ALL
+                </div>
+            </div>
+        </div>
+        </div>
+    </section>
+
+    <section>
+        <div class='column_blocks'>
+        <div class='block'>
+            <h1>SPACE</h1>
+            <div class='artilce'>
+                <div class='img_container_block2'>
+                <img src="{{Space_block_large.urlToImage}}" alt="" width=100% height=100%>
+                </div>
+                <div class='article_info'>
+                    <h3>{{Space_block_large.title}}</h3>
+                        <p>By {{Space_block_large.author}}</p>
+                </div>
+            </div>
+            {% for artilce in Space_block %}
+            <div class='artilce'>
+                <h3>{{artilce.title}}</h3>
+                    <p>By {{artilce.author}}</p>
+            </div>
+            {% endfor %}
+            </div>
+        <div class='block'>
+            <h1>LIFE HACKS</h1>
+            <div class='artilce'>
+                <div class='img_container_block2'>
+                <img src="{{Life_hack_large.urlToImage}}" alt="" width=100% height=100%>
+                </div>
+                <div class='article_info'>
+                    <h3>{{Life_hack_large.title}}</h3>
+                        <p>By {{Life_hack_large.author}}</p>
+                </div>
+            </div>
+            {% for artilce in Life_hack_block %}
+            <div class='artilce'>
+                <h3>{{artilce.title}}</h3>
+                <p>By {{artilce.author}}</p>
+            </div>
+            {% endfor %}
+        </div>
+        <div class='block'>
+            <h1>ANIMALS</h1>
+            <div class='artilce'>
+                <div class='img_container_block2'>
+                <img src="{{Animal_block_large.urlToImage}}" alt="" width=100% height=100%>
+                </div>
+                <div class='article_info'>
+                    <h3>{{Animal_block_large.title}}</h3>
+                        <p>By {{Animal_block_large.author}}</p>
+                </div>
+            </div>
+
+            {% for artilce in Animal_block %}
+            <div class='artilce'>
+                <h3>{{artilce.title}}</h3>
+                <p>By {{artilce.author}}</p>
+            </div>
+            {% endfor %}
+            
+        </div>
+        <div class='block'>
+            <h1>HEALTH</h1>
+            <div class='artilce'>
+                <div class='img_container_block2'>
+                <img src="{{Health_block_large.urlToImage}}" alt="" width=100% height=100%>
+                </div>
+                <div class='article_info'>
+                    <h3>{{Health_block_large.title}}</h3>
+                        <p>By {{Health_block_large.author}}</p>
+                </div>
+            </div>
+            {% for artilce in Health_block %}
+            <div class='artilce'>
+                <h3>{{artilce.title}}</h3>
+                <p>By {{artilce.author}}</p>
+            </div>
+            {% endfor %}
+        </div>
+        </div>
+    </section>
+        {% endblock content %}
+
+
+
+        
+        <script src="" async defer></script>
+    </body>
+</html>
