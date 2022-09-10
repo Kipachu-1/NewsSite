@@ -7,7 +7,9 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <title></title>
         <meta name="description" content="">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+
         {% load static %}
         <link rel="stylesheet" href="{% static 'arsite/home.css' %}">
     </head>
@@ -16,27 +18,25 @@
        <div class="navbar">
         
         <div class='up'>
-            <div class='LOGO plus'>
-                LOGO+
-            </div>
-
             <div class='LOGO noplus'>
-                LOGO
+                <a href="{% url 'home' %}">LOGO</a>
             </div>
             <div class='Search_Slinks'>
+                {% block search_form %}
                 <div class='Search'>
-
+                    <form id="content" method='POST'>
+                        {% csrf_token %}
+                        <input type="text" name="q" class="input" id="search-input">
+                        <button type="reset" class="search" id="search-btn"></button>
+                      </form>
                 </div>
-                <div class='Slinks'>
+                {% endblock search_form %}
 
-                </div>
             </div>
         </div>
         <div class='topics'>
             <div>
             <p class="topic"> <a href="{% url 'category_page' 'Science' %}">Science</a></p>
-            <p class="topic"><a href="{% url 'category_page' 'Environment' %}">Environment</a></p>
-            <p class="topic"><a href="{% url 'category_page' 'Technology' %}">Technology</a></p>
             </div>
         </div>
 
@@ -49,12 +49,12 @@
            
                 <div class='Large'>
                     <div class='img_container'>
-                        <img src="{{Scince_block_large1.urlToImage}}" alt="" width=100% height=100%>
+                        <a href="{% url 'article_page' Scince_block_large1.title %}"><img src="{{Scince_block_large1.header_image}}" alt="" width=100% ></a>
                     </div>
-                    <div class='article_info'>
-                        <h3>{{Scince_block_large1.title}}</h3>
-        
-                        <p>By {{Scince_block_large1.author}}</p>
+                    <div class='article_info' id='large_article_info'>
+                        <a href="{% url 'article_page' Scince_block_large1.title %}"><h3>{{Scince_block_large1.title}}</h3></a>
+                        <p id='large_subtitle'>{{Scince_block_large1.description}}</p>
+                        <p id='by_author'>BY {{Scince_block_large1.Author.upper}}</p>
                     </div>
                 </div>
             
@@ -62,12 +62,12 @@
             {% for article in Scince_news %}
             <div class='small'>
                 <div class='small_img_container'>
-                    <img src="{{article.urlToImage}}" alt="" width=100% height=100%>
+                    <a href="{% url 'article_page' article.title %}"><img src="{{article.header_image}}" alt="" width=100% ></a>
                 </div>
                 <div class='article_info'>
-                    <h3>{{article.title}}</h3>
-        
-                    <p>By {{article.author}}</p>
+                    <a href="{% url 'article_page' article.title %}"><h3>{{article.title}}</h3></a>
+                    <p id='artilce_desc'>{{article.description|slice:":70"}}...</p>
+                    <p id='by_author' >BY {{article.Author.upper}}</p>
                 </div>
             </div>
             {% endfor %}
@@ -78,56 +78,56 @@
         <section>
         <div class='blocks'>
         <div class='science_block'>
-            <div class='bar_name'>Science</div>
+            <div class='bar_name'><p id='bar_name2'>Science</p></div>
             <div class='articles_block'>
                 <div class='large_block'>
                     <div class='img_container_block'>
-                    <img src="{{Scince_block_large.urlToImage}}" alt="" width=100% height=100%>
+                    <img src="{{Scince_block_large.header_image}}" alt="" width=100% >
                     </div>
-                    <div class='article_info_block'>
-                        <h3>{{Scince_block_large.title}}</h3>
-                        <p>By {{Scince_block_large.author}}</p>
+                    <div class='article_info_block' id='info_block_block'>
+                        <a href="{% url 'article_page' Scince_block_large.title %}"><h3>{{Scince_block_large.title}}</h3></a>
+                        <p id='by_author'>BY {{Scince_block_large.Author.upper}}</p>
                     </div>  
                 </div>
                 <div class='small_blocks'>
                     {% for science_article in Scince_block %}
                     <div class='small_block'>
-                        <h3>{{science_article.title}}</h3>
-                        <p>By {{science_article.author}}</p>
+                        <a href="{% url 'article_page' science_article.title %}"><h3>{{science_article.title}}</h3></a>
+                        <p id='by_author'>BY {{science_article.Author.upper}}</p>
                     </div>
                     {% endfor %}
                 </div>
             </div>
             <div class='btn_area'>
                 <div class='view_all_btn'>
-                    VIEW ALL
+                    <a href="{% url 'category_page' 'Science' %}">VIEW ALL</a>
                 </div>
             </div>
         </div>
         <div class='tech_block'>
-            <div class='bar_name'>Tech</div>
+            <div class='bar_name'><p id='bar_name2'>Tech</p></div>
             <div class='articles_block'>
                 <div class='large_block'>
                     <div class='img_container_block'>
-                        <img src="{{Tech_block_large.urlToImage}}" alt="" width=100% height=100%>
+                        <a href="{% url 'article_page' Tech_block_large.title %}"><img src="{{Tech_block_large.header_image}}" alt="" width=100% ></a>
                         </div>
-                    <div class='article_info_block'>
-                        <h3>{{Tech_block_large.title}}</h3>
-                        <p>By {{Tech_block_large.author}}</p>
+                    <div class='article_info_block'  id='info_block_block'>
+                        <a href="{% url 'article_page' Tech_block_large.title %}"><h3>{{Tech_block_large.title}}</h3></a>
+                        <p id='by_author'>BY {{Tech_block_large.Author.upper}}</p>
                     </div>  
                 </div>
                 <div class='small_blocks'>
                     {% for tech_article in Tech_block %}
                     <div class='small_block'>
-                        <h3>{{tech_article.title}}</h3>
-                        <p>By {{tech_block.author}}</p>
+                        <a href="{% url 'article_page' tech_article.title %}"><h3>{{tech_article.title}}</h3></a>
+                        <p id='by_author' >BY {{tech_article.Author.upper}}</p>
                     </div>
                     {% endfor %}
                 </div>
             </div>
             <div class='btn_area'>
                 <div class='view_all_btn'>
-                    VIEW ALL
+                    <a href="{% url 'category_page' 'Technology' %}">VIEW ALL</a>
                 </div>
             </div>
         </div>
@@ -137,20 +137,22 @@
     <section>
         <div class='column_blocks'>
         <div class='block'>
-            <h1>SPACE</h1>
+            <a href="{% url 'category_page' 'Space' %}"><h1>SPACE</h1></a>
             <div class='artilce'>
                 <div class='img_container_block2'>
-                <img src="{{Space_block_large.urlToImage}}" alt="" width=100% height=100%>
+                    <a href="{% url 'article_page' Space_block_large.title %}"><img src="{{Space_block_large.header_image}}" alt="" width=100% ></a>
                 </div>
-                <div class='article_info'>
-                    <h3>{{Space_block_large.title}}</h3>
-                        <p>By {{Space_block_large.author}}</p>
+                <div class='article_info' id='article_info_artilce'>
+                    <a href="{% url 'article_page' Space_block_large.title %}"><h3>{{Space_block_large.title}}</h3></a>
+                        <p id='by_author'>BY {{Space_block_large.Author.upper}}</p>
                 </div>
             </div>
             {% for artilce in Space_block %}
             <div class='artilce'>
-                <h3>{{artilce.title}}</h3>
-                    <p>By {{artilce.author}}</p>
+                <div class='article_info' id='article_info_artilce'>
+                <a href="{% url 'article_page' artilce.title %}"><h3>{{artilce.title}}</h3></a>
+                    <p id='by_author'>BY {{artilce.Author.upper}}</p>
+                </div>    
             </div>
             {% endfor %}
             </div>
@@ -158,36 +160,40 @@
             <h1>LIFE HACKS</h1>
             <div class='artilce'>
                 <div class='img_container_block2'>
-                <img src="{{Life_hack_large.urlToImage}}" alt="" width=100% height=100%>
+                    <img src="{{Life_hack_large.header_image}}" alt="" width=100% >
                 </div>
                 <div class='article_info'>
                     <h3>{{Life_hack_large.title}}</h3>
-                        <p>By {{Life_hack_large.author}}</p>
+                    <p id='by_author'>BY {{artilce.Author.upper}}</p>
                 </div>
             </div>
             {% for artilce in Life_hack_block %}
             <div class='artilce'>
-                <h3>{{artilce.title}}</h3>
-                <p>By {{artilce.author}}</p>
+                <div class='article_info' id='article_info_artilce'>
+                    <a href="{% url 'article_page' artilce.title %}"><h3>{{artilce.title}}</h3></a>
+                        <p id='by_author'>BY {{artilce.Author}}</p>
+                    </div> 
             </div>
             {% endfor %}
         </div>
         <div class='block'>
-            <h1>ANIMALS</h1>
+            <a href="{% url 'category_page' 'Animal' %}"><h1>ANIMALS</h1></a>
             <div class='artilce'>
                 <div class='img_container_block2'>
-                <img src="{{Animal_block_large.urlToImage}}" alt="" width=100% height=100%>
+                    <a href="{% url 'article_page' Animal_block_large.title %}"><img src="{{Animal_block_large.header_image}}" alt="" width=100% ></a>
                 </div>
-                <div class='article_info'>
-                    <h3>{{Animal_block_large.title}}</h3>
-                        <p>By {{Animal_block_large.author}}</p>
+                <div class='article_info' id='article_info_artilce'>
+                    <a href="{% url 'article_page' Animal_block_large.title %}"><h3>{{Animal_block_large.title}}</h3></a>
+                        <p id='by_author'> BY {{Animal_block_large.Author.upper}}</p>
                 </div>
             </div>
 
             {% for artilce in Animal_block %}
             <div class='artilce'>
-                <h3>{{artilce.title}}</h3>
-                <p>By {{artilce.author}}</p>
+                <div class='article_info' id='article_info_artilce'>
+                    <a href="{% url 'article_page' artilce.title %}"><h3>{{artilce.title}}</h3></a>
+                    <p id='by_author'>BY {{artilce.Author.upper}}</p>
+                    </div> 
             </div>
             {% endfor %}
             
@@ -196,27 +202,49 @@
             <h1>HEALTH</h1>
             <div class='artilce'>
                 <div class='img_container_block2'>
-                <img src="{{Health_block_large.urlToImage}}" alt="" width=100% height=100%>
+                <img src="{{Health_block_large.header_image}}" alt="" width=100% >
                 </div>
-                <div class='article_info'>
+                <div class='article_info' id='article_info_artilce'>
                     <h3>{{Health_block_large.title}}</h3>
-                        <p>By {{Health_block_large.author}}</p>
+                        <p id='by_author'>BY {{Health_block_large.Author.upper}}</p>
                 </div>
             </div>
             {% for artilce in Health_block %}
             <div class='artilce'>
-                <h3>{{artilce.title}}</h3>
-                <p>By {{artilce.author}}</p>
+                
+
+                    <div class='article_info'>
+                        <a href="{% url 'article_page' artilce.title %}"><h3>{{artilce.title}}</h3></a>
+                        <p id='by_author'>BY {{artilce.Author.upper}}</p>
+                        </div> 
+
             </div>
             {% endfor %}
         </div>
         </div>
     </section>
         {% endblock content %}
+    <div id='footer'>
+        <div id='footer_text'>
+        <h1>Like science, tech, and writing articles?</h1>
+        <p id='footer_text_2'>Sign up to be a part of us!</p>
+        </div> 
+        <div id='footer_btn'>
+            LET'S GO
+        </div>
+    </div>
 
+    <script>
+        const input = document.getElementById("search-input");
+        const searchBtn = document.getElementById("search-btn");
 
+        const expand = () => {
+        searchBtn.classList.toggle("close");
+        input.classList.toggle("square");
+        };
 
-        
+        searchBtn.addEventListener("click", expand);
+    </script>
         <script src="" async defer></script>
     </body>
 </html>

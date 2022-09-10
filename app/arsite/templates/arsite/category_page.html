@@ -1,5 +1,6 @@
 {% extends 'arsite/home.html' %}
 {% block head %}
+
 {{ block.super }}
 {% load static %}
 <link rel="stylesheet" href="{% static 'arsite/category_page.css' %}">
@@ -11,28 +12,37 @@
 {% block content %}
 <div class='category_info'>
 <h1>{{category}}</h1>
-<p>{{category_desc}}</p>
+<p id='category_desc'>{{category_desc}}</p>
 </div>
 
 <div class='articles'>
-    {% for article in articles %}
-    <div class='article_block'>
-        <div class='img_block'>
-            <img src="{{article.urlToImage}}" alt="" width=100% height=100%>
-        </div>
-        <div class='block_info'>
-            <h3>{{article.title}}</h3>
-            <p>By {{article.author}}</p>
-        </div>
-    </div>
+    {% for article in page_obj %}     
+                <div class='article_block'>
+                    <div class='img_block'>
+                        <a href="{% url 'article_page' article.title %}"><img src="{{article.header_image}}" alt="" width=100% height=100%></a>
+                    </div>
+                    <div class='block_info'>
+                        <a href="{% url 'article_page' article.title %}"><h3>{{article.title}}</h3></a>
+                        <p id='by_author'>BY {{article.Author.upper}}</p>
+                    </div>
+                </div>
     {% endfor %}
 </div>
 
 
+<div class="pagination">
+        {% if page_obj.has_previous %}
+            <a href="?page=1"><img class='next_back next'src="data:image/svg+xml;utf8;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCI+PGcgZGF0YS1uYW1lPSJMYXllciAyIj48ZyBkYXRhLW5hbWU9ImFycm93aGVhZC1yaWdodCI+PHJlY3Qgd2lkdGg9IjI0IiBoZWlnaHQ9IjI0IiBvcGFjaXR5PSIwIiB0cmFuc2Zvcm09InJvdGF0ZSgtOTAgMTIgMTIpIi8+PHBhdGggZD0iTTE4Ljc4IDExLjM3bC00Ljc4LTZhMSAxIDAgMCAwLTEuNDEtLjE1IDEgMSAwIDAgMC0uMTUgMS40MUwxNi43MSAxMmwtNC40OCA1LjM3YTEgMSAwIDAgMCAuMTMgMS40MUExIDEgMCAwIDAgMTMgMTlhMSAxIDAgMCAwIC43Ny0uMzZsNS02YTEgMSAwIDAgMCAuMDEtMS4yN3oiLz48cGF0aCBkPSJNNyA1LjM3YTEgMSAwIDAgMC0xLjYxIDEuMjZMOS43MSAxMmwtNC40OCA1LjM2YTEgMSAwIDAgMCAuMTMgMS40MUExIDEgMCAwIDAgNiAxOWExIDEgMCAwIDAgLjc3LS4zNmw1LTZhMSAxIDAgMCAwIDAtMS4yN3oiLz48L2c+PC9nPjwvc3ZnPg==" alt=""></a>
+            <a href="?page={{ page_obj.previous_page_number }}">  <img  class='next_back next' src="data:image/svg+xml;utf8;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgZmlsbD0ibm9uZSI+PHBhdGggZmlsbD0iIzAwMCIgZmlsbC1ydWxlPSJldmVub2RkIiBkPSJNOC4zMDYgMTguNjk0Yy40MDguNDA4IDEuMDcuNDA4IDEuNDc4IDBsNS45MTMtNS45QTEuMDQgMS4wNCAwIDAgMCAxNiAxMS45N2ExLjA0IDEuMDQgMCAwIDAtLjMwNi0uNzYxbC01LjkxLTUuOTA0YTEuMDQ2IDEuMDQ2IDAgMCAwLTEuNDc4IDAgMS4wNDMgMS4wNDMgMCAwIDAgMCAxLjQ3Nmw1LjIyNyA1LjIyLTUuMjI3IDUuMjE3YTEuMDQyIDEuMDQyIDAgMCAwIDAgMS40NzVaIiBjbGlwLXJ1bGU9ImV2ZW5vZGQiLz48L3N2Zz4=" alt="">  </a>
+        {% endif %}
 
+        <p class="current">
+            Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+        </p>
 
-
-
-
-
+        {% if page_obj.has_next %}
+            <a href="?page={{ page_obj.next_page_number }}"> <img class='next1 next' src="data:image/svg+xml;utf8;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgZmlsbD0ibm9uZSI+PHBhdGggZmlsbD0iIzAwMCIgZmlsbC1ydWxlPSJldmVub2RkIiBkPSJNOC4zMDYgMTguNjk0Yy40MDguNDA4IDEuMDcuNDA4IDEuNDc4IDBsNS45MTMtNS45QTEuMDQgMS4wNCAwIDAgMCAxNiAxMS45N2ExLjA0IDEuMDQgMCAwIDAtLjMwNi0uNzYxbC01LjkxLTUuOTA0YTEuMDQ2IDEuMDQ2IDAgMCAwLTEuNDc4IDAgMS4wNDMgMS4wNDMgMCAwIDAgMCAxLjQ3Nmw1LjIyNyA1LjIyLTUuMjI3IDUuMjE3YTEuMDQyIDEuMDQyIDAgMCAwIDAgMS40NzVaIiBjbGlwLXJ1bGU9ImV2ZW5vZGQiLz48L3N2Zz4=" alt=""> </a>
+            <a href="?page={{ page_obj.paginator.num_pages }}">  <img class='next2 next' src="data:image/svg+xml;utf8;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCI+PGcgZGF0YS1uYW1lPSJMYXllciAyIj48ZyBkYXRhLW5hbWU9ImFycm93aGVhZC1yaWdodCI+PHJlY3Qgd2lkdGg9IjI0IiBoZWlnaHQ9IjI0IiBvcGFjaXR5PSIwIiB0cmFuc2Zvcm09InJvdGF0ZSgtOTAgMTIgMTIpIi8+PHBhdGggZD0iTTE4Ljc4IDExLjM3bC00Ljc4LTZhMSAxIDAgMCAwLTEuNDEtLjE1IDEgMSAwIDAgMC0uMTUgMS40MUwxNi43MSAxMmwtNC40OCA1LjM3YTEgMSAwIDAgMCAuMTMgMS40MUExIDEgMCAwIDAgMTMgMTlhMSAxIDAgMCAwIC43Ny0uMzZsNS02YTEgMSAwIDAgMCAuMDEtMS4yN3oiLz48cGF0aCBkPSJNNyA1LjM3YTEgMSAwIDAgMC0xLjYxIDEuMjZMOS43MSAxMmwtNC40OCA1LjM2YTEgMSAwIDAgMCAuMTMgMS40MUExIDEgMCAwIDAgNiAxOWExIDEgMCAwIDAgLjc3LS4zNmw1LTZhMSAxIDAgMCAwIDAtMS4yN3oiLz48L2c+PC9nPjwvc3ZnPg==" alt="">   </a>
+        {% endif %}
+</div>
 {% endblock content %}

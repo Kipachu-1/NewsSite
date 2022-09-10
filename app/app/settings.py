@@ -25,10 +25,8 @@ SECRET_KEY = 'django-insecure-uq=h&0*)m4rq#a)nyg9ea$*2)rip+^()_!=&ks_*&%#8lm_t9%
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1', '.herokuapp.com']
+ALLOWED_HOSTS = ['127.0.0.1', '.herokuapp.com', '172.20.10.2', '192.168.205.31', '10.48.97.54']
 
-
-# Application definition
 
 INSTALLED_APPS = [
     'arsite.apps.ArsiteConfig',

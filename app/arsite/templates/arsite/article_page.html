@@ -12,25 +12,72 @@
 {% block content %}
 <div class="start">
 <h1 class='title'>
-    {{article.name}}
+    {{article.title}}
 </h1>
 <h3 class='subtitle'>
-    {{article.name}}
+    {{article.description}}
 </h3>
 
-<p class='author_date'>by {{article.author}}/ PUBLISHED {{article.updated}}</p>
+<p class='author_date'>BY {{article.Author}}/ PUBLISHED {{article.updated}}</p>
 </div>
 
 <div class='article_img'>
-    <img class='img'src="{{article.header_image.url}}" alt="">
+    {% if  article.header_image %}
+    <img class='img'src="{{article.header_image}}" alt="">
+    {% endif %}
 </div>
+
 
 <div class='Article_body'>
-    {{article.body}}
+    {{article.body|linebreaks}}
 </div>
 
 
+<div class='conversation'>
+    <h2>Conversation</h2>
+    <hr>
+    <p>Your voice matters. Conversations are moderated for civility.</p>
+    <div class='text_area'>
+        <form action="" method="POST">
+            {% csrf_token %}
+            <div class="wrapper">
+            <textarea name="body" id="comment_body" spellcheck="false"></textarea>
+            {% if request.user.is_authenticated %}
+            <input type="submit" value="Comment" class='btn btn_input' id='btn_input'>
+            {% else %}
+            <a href="{% url 'signup_page' signbtn %}"> <div class='btn'>Sign up to comment</div></a>
+            {% endif %}
+            </div>
+            
+        </form>
+    </div>
+    {% for comment in comments %}
+        <div class='comment_container'>
+            <p class='comment_user'>{{comment.user}}</p>
+            <p class='comment_time'>{{comment.created}}</p>
+            <p class='comment_body'>{{comment.body}}</p>
+        </div>
+    {% endfor %}
+</div>
+
+<script>
+    const Text = document.getElementById("comment_body");
+    Text.style.cssText = `overflow-y:hidden`;
+
+
+    Text.addEventListener("input", function() {
+        this.style.height = "auto";
+        this.style.height = `${this.scrollHeight - 28}px`;
+        
+    }
+    )
+    const btn = document.getElementById("btn_input");
+    Text.addEventListener('input', () => {
+    btn.disabled = textarea.value == '';
+    });
+</script>
 {% endblock content %}
+
 
 
 
