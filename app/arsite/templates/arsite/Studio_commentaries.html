@@ -1,0 +1,34 @@
+{% extends 'arsite/Studio.html' %}
+{% block head %}
+{{ block.super }}
+{% load static %}
+<link rel="stylesheet" href="{% static 'arsite/Studio_commentaries.css' %}">
+{% endblock head %}
+{% block main_content %}
+<div id='comment_list'>
+    <div id='comment_list_header'>
+        <h1>Comments</h1>
+    </div>
+{% for comment in comments %}
+<div id='comment_info_block'>
+    <div id='comment_article_header'>
+        <a href="{% url 'article_page' comment.article.title %}">
+            <div id='article_img' style="background-image: url({{comment.article.header_image.url}})">
+            </div></a>
+        <div id='comment_article_title'>
+            <a href="{% url 'article_page' comment.article.title %}"><p>{{comment.article.title}}</p></a>
+        </div>
+    </div>
+    <div id='comment_block'>
+        <div id='comment_block_header'>
+            <p id='comment_block_username'>{{comment.user}}</p>
+        </div>
+        <div id='comment_block_body'>
+            <p id='comment_block_body'>{{comment.body|linebreaks}}</p>
+        </div>
+    </div>
+</div>
+{% endfor %}
+</div>
+
+{% endblock main_content %}

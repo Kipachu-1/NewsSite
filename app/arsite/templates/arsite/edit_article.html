@@ -1,0 +1,106 @@
+{% extends 'arsite/Studio.html' %}
+
+{% block head %}
+{{ block.super }}
+{% load static %}
+{% block css_style %}
+<link rel="stylesheet" href="{% static 'arsite/add_article_page.css' %}">
+{% endblock css_style %}
+
+{% endblock head %}
+        
+        {% block replace_by_add %}
+        <div id='container'>
+        <div id='header_container'> 
+            <a href="{% url 'studio' ' ' %}" id='back_to_studio'> Studio</a>
+        </div>
+        <form action="" method='POST' enctype='multipart/form-data'>
+            {% csrf_token %}
+            {% if request.get_full_path == '/studio/article/add' %}
+            <textarea name="Title" id='title_area' class='text_area' rows="1" placeholder='Title' maxlength="100"></textarea>
+            <textarea name="Subtitle" rows="1" id='subtitle_area' class='text_area' placeholder='Subtitle NOT REQUIRED' maxlength="200"></textarea>
+            <input type="file" class="file-input" name='header_image' accept="image/*" id="image_upload">
+            <img id="image_file" src="#" />
+            <textarea name="Body" id="body_area" rows="5" class='text_area' placeholder='Write the text here'></textarea>
+            <textarea name="categories" id="category_area" rows="1" class='text_area' placeholder='List categories of the article' maxlength='50'></textarea>
+            <input type="submit" value="Publish" id='publish_btn'>
+            {% else %}
+            <textarea name="Title" id='title_area' class='text_area' rows="1" placeholder='Title' maxlength="100">{{article.title}}</textarea>
+            <textarea name="Subtitle" rows="1" id='subtitle_area' class='text_area' placeholder='Subtitle NOT REQUIRED' maxlength="200">{{article.subtitle}}</textarea>
+            <input type="file" class="file-input" name='header_image' accept="image/*" id="image_upload">
+            <img id="image_file" src="{{article.header_image.url}}" />
+            <textarea name="Body" id="body_area" rows="5" class='text_area' placeholder='Write the text here'>{{article.body}}</textarea>
+            <textarea name="categories" id="category_area" rows="1" class='text_area' placeholder='List categories of the article' maxlength='50'>{{article.category}}</textarea>
+            <input type="submit" value="Publish changes" id='publish_btn'>
+            {% endif %}
+        </form>
+        </div>
+        {% load static %}
+        <script>
+
+            image_upload.onchange = evt => {
+              const [file] = image_upload.files
+              if (file) {
+                image_file.src = URL.createObjectURL(file)
+              }
+            }
+            
+            </script>
+        <script>
+            const title_area = document.getElementById("title_area");
+            const subtitle_area = document.getElementById('subtitle_area');
+            const body_area = document.getElementById('body_area')
+            const category_area = document.getElementById('category_area')
+
+            const btn = document.getElementById("btn_input");
+            title_area.style.cssText = `overflow-y:hidden`;
+        
+            
+            title_area.addEventListener("input", function() {
+                this.style.height = "auto";
+                this.style.height = `${this.scrollHeight - 10}px`    
+            }
+            )
+
+
+            subtitle_area.style.cssText = `overflow-y:hidden`;
+        
+            
+            subtitle_area.addEventListener("input", function() {
+                this.style.height = "auto";
+                this.style.height = `${this.scrollHeight - 10}px`    
+            }
+            )
+
+            body_area.style.cssText = `overflow-y:hidden`;
+        
+            
+            body_area.addEventListener("input", function() {
+                this.style.height = "auto";
+                this.style.height = `${this.scrollHeight - 20}px`    
+            }
+            )
+            category_area.style.cssText = `overflow-y:hidden`;
+        
+            
+            category_area.addEventListener("input", function() {
+                this.style.height = "auto";
+                this.style.height = `${this.scrollHeight - 10}px`    
+            }
+            )
+
+
+
+            Text.addEventListener("keydown", function() {
+                if (this.value.length != 0) {
+                    btn.disabled = false
+                }
+                else {
+                    btn.disabled = true
+                }
+            }
+            )
+        
+        
+        </script>
+        {% endblock replace_by_add %}

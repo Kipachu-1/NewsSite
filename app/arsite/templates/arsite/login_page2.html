@@ -26,7 +26,13 @@
                 top: 30%;
                 left: 50%;}
         </style>
+
         {% endblock %}
+        {% if messages %}
+            {% for message in messages %}
+                <p class='message'>{{ message }}</p>
+            {% endfor %}
+             {% endif %}
         <canvas id="test"></canvas>
 
         <div class="grid grid1">

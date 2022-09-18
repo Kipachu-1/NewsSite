@@ -19,7 +19,13 @@
     {% for article in page_obj %}     
                 <div class='article_block'>
                     <div class='img_block'>
-                        <a href="{% url 'article_page' article.title %}"><img src="{{article.header_image}}" alt="" width=100% height=100%></a>
+                        <a href="{% url 'article_page' article.title %}">
+                            {% if article.header_image%}
+                            <img src="{{article.header_image.url}}" alt="" width=100% height=100%>
+                            {% else %}
+                            <img src="{{article.image_url}}" alt="" width=100% height=100%>
+                            {% endif %}
+                        </a>
                     </div>
                     <div class='block_info'>
                         <a href="{% url 'article_page' article.title %}"><h3>{{article.title}}</h3></a>

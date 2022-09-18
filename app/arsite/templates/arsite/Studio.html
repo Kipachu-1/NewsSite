@@ -1,0 +1,142 @@
+<html>
+    <head>
+        {% block head %}
+        {% load static %}
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        {% block css_style %}
+        <link rel="stylesheet" href="{% static 'arsite/Studio_page.css' %}">
+        {% endblock css_style %}
+        {% endblock head %}
+    </head>
+    <body>
+        {% block replace_by_delete %}
+        {% block replace_by_add %}
+        <div id='container'>
+            <div id='navbar'>
+                <div id='bar_header'>
+                    <a href="{% url 'studio' ' ' %}">
+                    Studio
+                    </a>
+                </div>
+                <div id='links'>
+                    <a href="{% url 'studio' 'main' %}">
+                        <div class='link'>
+                            <div class='link_icon'>
+                                <img class='link_icon_img' src="{% static 'arsite/icons/planet.svg' %}" alt="">
+                            </div>
+                            <p class='link_name'>
+                            Main
+                            </p>
+                        </div>
+                    </a>
+                    <a href="{% url 'studio' 'articles' %}">
+                    <div class='link'>
+                        <div class='link_icon'>
+                            <img class='link_icon_img' src="{% static 'arsite/icons/article.svg' %}" alt="">
+                        </div>
+                        <p class='link_name'>
+                            Articles
+                            </p>
+                    </div>
+                    </a>
+                    <a href="{% url 'studio' 'commentaries' %}">
+                        <div class='link'>
+                            <div class='link_icon'>
+                                <img class='link_icon_img' src="{% static 'arsite/icons/message.svg' %}" alt="">
+                            </div>
+                            <p class='link_name'>
+                                Commentaries
+                                </p>
+                            </div>
+                    </a>
+                    
+                    
+                        <a href="{% url 'studio' 'statistics' %}">
+                            <div class='link'>
+                                <div class='link_icon'>
+                                    <img class='link_icon_img' src="{% static 'arsite/icons/statistics.svg' %}" alt="">
+                                </div>
+                                <p class='link_name'>
+                                    Statistics
+                                    </p></div>
+                        </a>
+                        <a href="{% url 'home' %}">
+                            <div class='link'>
+                                <div class='link_icon'>
+                                    <img class='link_icon_img' src="{% static 'arsite/icons/back.svg' %}" alt="">
+                                </div>
+                                <p class='link_name'>
+                                    back
+                                    </p>
+                                </div>
+                        </a>
+                </div>
+            </div>
+            <div id='general_info'>
+                {% block main_content %}
+                <div id='main_information'>
+                    <div id='sub_container'>
+                    <div id='views_block1' class='info_blocks'>
+                        <p id='views_block_inf'>{{views}}  views</p>
+                    </div>
+                    <div id='views_block2' class='info_blocks'>
+                        <p id='views_block_inf'>592  views</p>
+                    </div>
+                    <div id='views_block3' class='info_blocks'>
+                        <p id='views_block_inf'>592  views</p>
+                    </div>
+                    </div>
+                </div>
+                <div id='last_articles_list'>
+                    <div id='header_list'>Last Articles</div>
+                    <div id='last_articles'>
+                        {% for article in last_list_articles %}
+                        <a href="{% url 'article_page' article.title %}">
+                            <div id='article_block'>
+                                
+                                    <div id='image_container' style="background-image: url({{article.header_image.url}})">
+                                    </div>
+                                
+                                <div id='article_info'>
+                                    <p id='article_title'>{{article.title}}</p>
+                                    <p class='article_date'>{{article.created}}</p>
+                                </div>
+
+                            </div>
+                        </a>    
+                            
+
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+            {% endblock main_content %}
+        </div>
+        <div id='outcast'>
+            <div id='add_btn' class='outcast_child'>
+                <img src="{% static 'arsite/icons/add.svg' %}" alt="" class='outcast_img'>
+            </div>
+            <div id='profile_avatar' class='outcast_child'>
+                <img src="{% static 'arsite/icons/profile.svg' %}" alt="" class='outcast_img'>
+            </div>
+        </div>
+        <div id='actions_list_add'>
+            <a href="{% url 'article_add_page' %}">
+                <div class='btn_action'>
+                    <img src="{% static 'arsite/icons/new_article.svg' %}" alt="" class='btn_img'>
+                    <p class='btn_action_name'>Write an article</p>
+                </div>
+            </a>
+        </div>
+        <script src="{% static 'arsite/Studio_page.js' %}"></script>
+        
+
+
+        <script src="" async defer></script>
+        {% endblock replace_by_add %}
+        {% endblock replace_by_delete %}
+    </body>
+</html>

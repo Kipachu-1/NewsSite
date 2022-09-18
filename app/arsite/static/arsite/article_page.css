@@ -41,9 +41,23 @@
     width: 100%;
 }
 br {
-    display: block; /* makes it have a width */
-    content: ""; /* clears default height */
-    margin-top: 10px; /* change this to whatever height you want it */
+    display: block;
+    content: ""; 
+    margin-top: 10px; 
+}
+
+#categories_list {
+  display:flex;
+  flex-direction: row;
+  width: 70%;
+  margin: 0 auto;
+}
+#category_name {
+  margin: 10px;
+  background-color: rgb(183, 106, 255);
+  padding: 10px;
+  color: white;
+  border-radius: 4%;
 }
 
 .conversation {
@@ -63,16 +77,18 @@ hr {
     margin: 0;
 }
 .comment_container {
-    border: 1px solid gray;
     overflow-wrap: break-word;
     word-break: normal;
+    border-bottom: 1px solid  rgb(183, 106, 255);
+    margin-bottom: 14px;
 }
 .comment_user {
     font-weight: 600;
 }
 .comment_time {
     font-weight: 100;
-    font-size: 15px;
+    font-size: 16px;
+    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }
 
 ::selection{
@@ -89,6 +105,7 @@ hr {
     padding: 25px 25px 30px;
     box-shadow: 8px 8px 10px rgba(0,0,0,0.06);
     padding-bottom: 70px;
+    margin-bottom: 14px;
   }
   .wrapper h2{
     color: #4671EA;
@@ -97,6 +114,7 @@ hr {
     height: fit-content;
   }
   .wrapper textarea{
+    z-index: 100;
     transition: 0.5s;
     width: 94%;
     resize: none;
@@ -106,7 +124,6 @@ hr {
     margin-top: 20px;
     border-radius: 5px;
     max-height: 300px;
-    caret-color: #4671EA;
     border: 1px solid #bfbfbf;
   }
 
@@ -148,10 +165,53 @@ hr {
     width: 0px;
   }
 
+textarea::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+    color: rgb(183, 106, 255);
+  }
+  
+textarea:-ms-input-placeholder { /* Internet Explorer 10-11 */
+    color: rgb(183, 106, 255);
+  }
+  
+textarea::-ms-input-placeholder { /* Microsoft Edge */
+    color: rgb(183, 106, 255);
+  }
+
+#actions_list {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  left: 5px;
+  row-gap: 5px;
+  top: 120px;
+}
+.action_btn {
+  display: flex;
+  flex-direction: row;
+  cursor: pointer;
+}
+.action_btn_icon {
+  width: 40px;
+  height: 40px;
+  filter: invert(52%) sepia(37%) saturate(4244%) hue-rotate(235deg) brightness(97%) contrast(96%);
+}
+#action_btn_name {
+  margin: auto 0;
+  color: rgb(183, 106, 255);;
+}
+@media only screen and (max-width: 1285px) {
+  #action_btn_name {
+    display: none;
+  }
+}
+
 @media only screen and (max-width: 800px) {
     .Article_body {
         width: 96%;
     } 
+    #categories_list {
+      width: 96%;
+    }
     .conversation {
         width: 96%;
     }

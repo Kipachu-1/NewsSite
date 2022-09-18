@@ -1,0 +1,30 @@
+{% extends 'arsite/Studio.html' %}
+{% block head %}
+{{ block.super }}
+{% load static %}
+<link rel="stylesheet" href="{% static 'arsite/Studio_articles.css' %}">
+{% endblock head %}
+{% block main_content %}
+
+<div id='last_articles_list'>
+    <div id='header_list'>My Articles</div>
+    <div id='last_articles'>
+        {% for article in list_articles %}
+        <a href="{% url 'article_page' article.title %}">
+            <div id='article_block'>
+                <div id='image_container' style="background-image: url({{article.header_image.url}})">
+                </div>
+
+                <div id='article_info'>
+                    <p id='article_title'>{{article.title}}</p>
+                    <p id='article_slice'>{{article.body|slice:":120"}}...</p>
+                </div>
+
+            </div>
+        </a>
+        {% endfor %}
+    </div>
+</div>
+</div>
+
+{% endblock main_content %}

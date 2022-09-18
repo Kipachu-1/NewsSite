@@ -12,7 +12,10 @@ urlpatterns = [
     path('logout', views.logout_user, name='logout_page'),
     path("login/",views.login_page, name='login_page_default'),
     path("register/", views.register, name='signup_page_default'),
-    
+    path('studio/article/add', views.add_article, name='article_add_page'),
+    path('studio/<str:section>', views.Author_studio, name='studio'),
+    path('studio/article/change/<str:name>', views.change_article, name='article_change_page'),
+    path('studio/article/delete/<str:name>', views.delete_article, name='article_delete_page')
 ]
 
 

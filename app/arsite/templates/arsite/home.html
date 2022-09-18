@@ -15,10 +15,59 @@
     </head>
     {% endblock head %}
     <body>
+        <div id="sidebar">
+            <ul class="menu">
+                <li class="menu-global menu-top">
+                    {% if not user.is_authenticated %}
+                    <a href="{% url 'login_page_default' %}">
+                    <span class="menu-text">Studio</span>
+                    </a>
+                    {% else %}
+                    <a href="{% url 'studio' 'main' %}">
+                        <span class="menu-text">Studio</span>
+                    </a>
+                    {% endif %}
+                    
+
+                </li>
+              <li class="menu-global menu-middle">
+                <span class="menu-text">Ai Weiwei</span>
+              </li>
+              <li class="menu-global menu-bottom">
+                <span class="menu-text">Bert Heller</span>
+              </li>
+              <li class="menu-global menu-hidden">
+                <span class="menu-text">Gustav Klimt</span>
+              </li>
+              {% if user.is_authenticated %}
+              
+              <li class="menu-global menu-hidden">
+                <a href="{% url 'logout_page' %}">
+                <span class="menu-text">Log out</span> 
+            </a>
+              </li>
+                
+              {% else %}
+              
+              <li class="menu-global menu-hidden">
+                <a href="{% url 'login_page_default' %}">
+                
+                <span class="menu-text">Log in</span> 
+            </a>
+              </li>
+                
+              {% endif %}
+
+              <div class="menu-close fa fa-close"></div>
+              <div class="click-blocker" id='click_area'></div>
+            </ul>
+          </div>
+          
        <div class="navbar">
-        
         <div class='up'>
-            <div class='LOGO noplus'>
+            
+ 
+            <div class='LOGO noplus' id='Logo'>
                 <a href="{% url 'home' %}">LOGO</a>
             </div>
             <div class='Search_Slinks'>
@@ -34,9 +83,15 @@
 
             </div>
         </div>
-        <div class='topics'>
+        <div class='topics' id='topics'>
             <div>
-            <p class="topic"> <a href="{% url 'category_page' 'Science' %}">Science</a></p>
+            <a href="{% url 'category_page' 'Science' %}" id='topic_link'>Science</a>
+            <a href="{% url 'category_page' 'Latest' %}" id='topic_link'> Latest</a>
+            <a href="{% url 'category_page' 'Authors' %}" id='topic_link'>Authors</a>
+            <a href="{% url 'category_page' 'Technology' %}" id='topic_link'>Tech</a>
+            <a href="{% url 'category_page' 'Animal' %}" id='topic_link'>Animal</a>
+            <a href="{% url 'category_page' 'Space' %}" id='topic_link'>Space</a>
+            <a href="{% url 'category_page' 'Health' %}" id='topic_link'>Health</a>
             </div>
         </div>
 
@@ -49,7 +104,13 @@
            
                 <div class='Large'>
                     <div class='img_container'>
-                        <a href="{% url 'article_page' Scince_block_large1.title %}"><img src="{{Scince_block_large1.header_image}}" alt="" width=100% ></a>
+                        <a href="{% url 'article_page' Scince_block_large1.title %}">
+                            {% if article.header_image%}
+                            <img src="{{Scince_block_large1.header_image.url}}" alt="" width=100% height=100%>
+                            {% else %}
+                            <img src="{{Scince_block_large1.image_url}}" alt="" width=100% height=100%>
+                            {% endif %}
+                        </a>
                     </div>
                     <div class='article_info' id='large_article_info'>
                         <a href="{% url 'article_page' Scince_block_large1.title %}"><h3>{{Scince_block_large1.title}}</h3></a>
@@ -62,7 +123,13 @@
             {% for article in Scince_news %}
             <div class='small'>
                 <div class='small_img_container'>
-                    <a href="{% url 'article_page' article.title %}"><img src="{{article.header_image}}" alt="" width=100% ></a>
+                    <a href="{% url 'article_page' article.title %}">
+                        {% if article.header_image%}
+                            <img src="{{article.header_image.url}}" alt="" width=100% height=100%>
+                            {% else %}
+                            <img src="{{article.image_url}}" alt="" width=100% height=100%>
+                            {% endif %}
+                    </a>
                 </div>
                 <div class='article_info'>
                     <a href="{% url 'article_page' article.title %}"><h3>{{article.title}}</h3></a>
@@ -82,7 +149,11 @@
             <div class='articles_block'>
                 <div class='large_block'>
                     <div class='img_container_block'>
-                    <img src="{{Scince_block_large.header_image}}" alt="" width=100% >
+                        {% if Scince_block_large.header_image%}
+                        <img src="{{Scince_block_large.header_image.url}}" alt="" width=100% height=100%>
+                        {% else %}
+                        <img src="{{Scince_block_large.image_url}}" alt="" width=100% height=100%>
+                        {% endif %}
                     </div>
                     <div class='article_info_block' id='info_block_block'>
                         <a href="{% url 'article_page' Scince_block_large.title %}"><h3>{{Scince_block_large.title}}</h3></a>
@@ -109,7 +180,13 @@
             <div class='articles_block'>
                 <div class='large_block'>
                     <div class='img_container_block'>
-                        <a href="{% url 'article_page' Tech_block_large.title %}"><img src="{{Tech_block_large.header_image}}" alt="" width=100% ></a>
+                        <a href="{% url 'article_page' Tech_block_large.title %}">
+                            {% if Tech_block_large.header_image%}
+                        <img src="{{Tech_block_large.header_image.url}}" alt="" width=100% height=100%>
+                        {% else %}
+                        <img src="{{Tech_block_large.image_url}}" alt="" width=100% height=100%>
+                        {% endif %}
+                        </a>
                         </div>
                     <div class='article_info_block'  id='info_block_block'>
                         <a href="{% url 'article_page' Tech_block_large.title %}"><h3>{{Tech_block_large.title}}</h3></a>
@@ -137,10 +214,16 @@
     <section>
         <div class='column_blocks'>
         <div class='block'>
-            <a href="{% url 'category_page' 'Space' %}"><h1>SPACE</h1></a>
+            <a href="{% url 'category_page' 'Space' %}"><h1 id='block_name'>SPACE</h1></a>
             <div class='artilce'>
                 <div class='img_container_block2'>
-                    <a href="{% url 'article_page' Space_block_large.title %}"><img src="{{Space_block_large.header_image}}" alt="" width=100% ></a>
+                    <a href="{% url 'article_page' Space_block_large.title %}">
+                        {% if Space_block_large.header_image%}
+                        <img src="{{Space_block_large.header_image.url}}" alt="" width=100% height=100%>
+                        {% else %}
+                        <img src="{{Space_block_large.image_url}}" alt="" width=100% height=100%>
+                        {% endif %}
+                    </a>
                 </div>
                 <div class='article_info' id='article_info_artilce'>
                     <a href="{% url 'article_page' Space_block_large.title %}"><h3>{{Space_block_large.title}}</h3></a>
@@ -157,14 +240,18 @@
             {% endfor %}
             </div>
         <div class='block'>
-            <h1>LIFE HACKS</h1>
+            <h1 id='block_name'>LIFE HACKS</h1>
             <div class='artilce'>
                 <div class='img_container_block2'>
-                    <img src="{{Life_hack_large.header_image}}" alt="" width=100% >
+                    {% if Life_hack_large.header_image%}
+                        <img src="{{Life_hack_large.header_image.url}}" alt="" width=100% height=100%>
+                        {% else %}
+                        <img src="{{Life_hack_large.image_url}}" alt="" width=100% height=100%>
+                        {% endif %}
                 </div>
-                <div class='article_info'>
+                <div class='article_info' id='article_info_artilce'>
                     <h3>{{Life_hack_large.title}}</h3>
-                    <p id='by_author'>BY {{artilce.Author.upper}}</p>
+                    <p id='by_author'>BY {{Life_hack_large.Author.upper}}</p>
                 </div>
             </div>
             {% for artilce in Life_hack_block %}
@@ -177,10 +264,16 @@
             {% endfor %}
         </div>
         <div class='block'>
-            <a href="{% url 'category_page' 'Animal' %}"><h1>ANIMALS</h1></a>
+            <a href="{% url 'category_page' 'Animal' %}"><h1 id='block_name'>ANIMALS</h1></a>
             <div class='artilce'>
                 <div class='img_container_block2'>
-                    <a href="{% url 'article_page' Animal_block_large.title %}"><img src="{{Animal_block_large.header_image}}" alt="" width=100% ></a>
+                    <a href="{% url 'article_page' Animal_block_large.title %}">
+                        {% if Animal_block_large.header_image%}
+                        <img src="{{Animal_block_large.header_image.url}}" alt="" width=100% height=100%>
+                        {% else %}
+                        <img src="{{Animal_block_large.image_url}}" alt="" width=100% height=100%>
+                        {% endif %}
+                    </a>
                 </div>
                 <div class='article_info' id='article_info_artilce'>
                     <a href="{% url 'article_page' Animal_block_large.title %}"><h3>{{Animal_block_large.title}}</h3></a>
@@ -199,21 +292,25 @@
             
         </div>
         <div class='block'>
-            <h1>HEALTH</h1>
+            <a href="{% url 'category_page' 'Health' %}"><h1 id='block_name'>HEALTH</h1></a>
             <div class='artilce'>
                 <div class='img_container_block2'>
-                <img src="{{Health_block_large.header_image}}" alt="" width=100% >
+                <a href="{% url 'article_page' Health_block_large.title %}">
+                    {% if Health_block_large.header_image%}
+                        <img src="{{Health_block_large.header_image.url}}" alt="" width=100% height=100%>
+                        {% else %}
+                        <img src="{{Health_block_large.image_url}}" alt="" width=100% height=100%>
+                        {% endif %}
+                </a>
                 </div>
                 <div class='article_info' id='article_info_artilce'>
-                    <h3>{{Health_block_large.title}}</h3>
+                    <a href="{% url 'article_page' Health_block_large.title %}"><h3>{{Health_block_large.title}}</h3></a>
                         <p id='by_author'>BY {{Health_block_large.Author.upper}}</p>
                 </div>
             </div>
             {% for artilce in Health_block %}
             <div class='artilce'>
-                
-
-                    <div class='article_info'>
+                    <div class='article_info' id='article_info_artilce'>
                         <a href="{% url 'article_page' artilce.title %}"><h3>{{artilce.title}}</h3></a>
                         <p id='by_author'>BY {{artilce.Author.upper}}</p>
                         </div> 
@@ -229,22 +326,32 @@
         <h1>Like science, tech, and writing articles?</h1>
         <p id='footer_text_2'>Sign up to be a part of us!</p>
         </div> 
-        <div id='footer_btn'>
+        <div id='footer_btn' onclick='click()'>
             LET'S GO
         </div>
     </div>
-
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"> 
+    </script>
     <script>
+        
+
         const input = document.getElementById("search-input");
         const searchBtn = document.getElementById("search-btn");
+        const menu_page = document.getElementById('menu_page');
+        const width = window.screen.availWidth;
 
         const expand = () => {
         searchBtn.classList.toggle("close");
         input.classList.toggle("square");
+        if (document.getElementById('Logo').style.opacity != '0') {
+            console.log(width)
+        document.getElementById('Logo').style.opacity = '0'}
+        else { document.getElementById('Logo').style.opacity = '1'}
         };
-
         searchBtn.addEventListener("click", expand);
+
     </script>
+      <script src="{% static 'arsite/menu_page.js' %}"></script>
         <script src="" async defer></script>
     </body>
 </html>

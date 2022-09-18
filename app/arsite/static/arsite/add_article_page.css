@@ -1,0 +1,91 @@
+
+#container {
+    display: flex;
+    flex-direction: column;
+    width:60%;
+    margin: 0 auto;
+    position: relative;
+}
+#header_container {
+    height: 200px;
+
+}
+textarea {
+    resize: none;
+    outline: none;
+    border: none;
+    height: auto;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+
+.text_area {
+    margin: 5px 0;
+    padding: 5px;
+}
+
+#title_area {
+    font-size: 34px;
+    font-weight: 600;
+    height: 40px;
+
+}
+
+#subtitle_area {
+    font-size: 20px;
+    margin-bottom: 10px;
+}
+#image_file {
+    height: auto;
+    width: 100%;
+}
+
+#body_area {
+    font-size: 20px;
+    margin-top: 10px;
+   
+}
+#category_area {
+    font-size: 20px;
+}
+#back_to_studio {
+    font-size: 40px;
+    outline: none;
+    text-decoration: none;
+    position: absolute;
+    top: 10px;
+    color: black;
+    left: 10px;
+    font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+
+}
+#publish_btn {
+    position: absolute;
+    border: none;
+    outline: none;
+    border-radius: 10px;
+    font-size: 25px;
+    padding: 5px 15px;
+    background-color: rgba(194, 54, 232, 0.753);
+    color: white;
+    right: 10px;
+    top:10px;
+    transition: 0.5s;
+    cursor: pointer;
+}
+@media only screen and (max-width: 1000px) { 
+    #container {
+        width: 90%;
+    }
+}
+
+@media only screen and (max-width: 700px) {
+    #container {
+        width: 100%;
+    }
+}

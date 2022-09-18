@@ -10,6 +10,30 @@
 
 
 {% block content %}
+{% if user.username == article.Author %}
+<div id='actions_list'>
+    <a href="{% url 'article_change_page' article.title %}">
+    <div class='action_btn'>
+        <div class='action_btn_icon'>
+            <img class='action_btn_icon' src="{% static 'arsite/icons/write-mail.svg' %}" alt="">
+        </div>
+        <p id='action_btn_name'>
+        Change 
+        </p>
+    </div>
+    </a>
+    <a href="{% url 'article_delete_page' article.title %}">
+    <div class='action_btn'>
+        <div class='action_btn_icon'>
+            <img class='action_btn_icon' src="{% static 'arsite/icons/remove.svg' %}" alt="">
+        </div>
+        <p id='action_btn_name'>
+        Delete 
+        </p>
+    </div>
+    </a>
+</div>
+{% endif %}
 <div class="start">
 <h1 class='title'>
     {{article.title}}
@@ -22,8 +46,10 @@
 </div>
 
 <div class='article_img'>
-    {% if  article.header_image %}
-    <img class='img'src="{{article.header_image}}" alt="">
+    {% if article.header_image%}
+    <img src="{{article.header_image.url}}" alt="" width=100% height=100%>
+    {% else %}
+    <img src="{{article.image_url}}" alt="" width=100% height=100%>
     {% endif %}
 </div>
 
@@ -32,6 +58,15 @@
     {{article.body|linebreaks}}
 </div>
 
+<div id='categories_list'>
+    {% for category in categories %}
+    <a href="{% url 'category_page' category %}">
+    <div id='category_name'>
+        {{category}}
+    </div>
+    </a>
+    {% endfor %}
+</div>
 
 <div class='conversation'>
     <h2>Conversation</h2>
@@ -41,14 +76,14 @@
         <form action="" method="POST">
             {% csrf_token %}
             <div class="wrapper">
-            <textarea name="body" id="comment_body" spellcheck="false"></textarea>
+            <textarea name="body" id="comment_body_text" class='comment_body_text' rows='1' placeholder='Your pinion'></textarea>
             {% if request.user.is_authenticated %}
-            <input type="submit" value="Comment" class='btn btn_input' id='btn_input'>
+            <input type="submit" value="Comment" class='btn btn_input' id='btn_input' disabled>
             {% else %}
             <a href="{% url 'signup_page' signbtn %}"> <div class='btn'>Sign up to comment</div></a>
             {% endif %}
             </div>
-            
+
         </form>
     </div>
     {% for comment in comments %}
@@ -61,20 +96,26 @@
 </div>
 
 <script>
-    const Text = document.getElementById("comment_body");
-    Text.style.cssText = `overflow-y:hidden`;
+    const Text = document.getElementById("comment_body_text");
+    const btn = document.getElementById("btn_input");
 
-
+    
     Text.addEventListener("input", function() {
         this.style.height = "auto";
-        this.style.height = `${this.scrollHeight - 28}px`;
+        this.style.height = `${this.scrollHeight - 28}px`
         
     }
     )
-    const btn = document.getElementById("btn_input");
-    Text.addEventListener('input', () => {
-    btn.disabled = textarea.value == '';
-    });
+    Text.addEventListener("keydown", function() {
+        if (this.value.length != 0) {
+            btn.disabled = false
+        }
+        else {
+            btn.disabled = true
+        }
+    }
+    )
+
 </script>
 {% endblock content %}
 
