@@ -1,4 +1,3 @@
-app/db.sqlite3
 app/arsite/migrations
 app/arsite/__pycache__
 app/__pycache__
