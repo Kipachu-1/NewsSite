@@ -78,22 +78,22 @@ WSGI_APPLICATION = 'app.wsgi.application'
 
 
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
-}
 # DATABASES = {
 #     'default': {
-#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-#         'NAME': 'dbkipachu',
-#         'USER': 'arsik',
-#         'PASSWORD': 'rootrootroot',
-#         'HOST': 'localhost',
-#         'PORT': '',
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',
 #     }
 # }
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': BASE_DIR / 'db.sqlite3',
+        'USER': 'arsik',
+        'PASSWORD': 'rootrootroot',
+        'HOST': '',
+        'PORT': '',
+    }
+}
 
 WHITENOISE_USE_FINDERS = True
 
