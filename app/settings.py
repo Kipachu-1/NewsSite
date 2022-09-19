@@ -88,10 +88,6 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': BASE_DIR / 'db.sqlite3',
-        'USER': 'arsik',
-        'PASSWORD': 'rootrootroot',
-        'HOST': '',
-        'PORT': '',
     }
 }
 
