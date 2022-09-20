@@ -199,6 +199,7 @@ def delete_article(request, name):
         return redirect('home')
     if request.method == 'POST':
         article_delete.delete()
+        return redirect('home')
     context = {
         'title': name
     }
