@@ -1,8 +1,12 @@
-
+.article_img {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
 .article_img > img{
-    width: 100%;
-    height: auto;
-    margin-bottom: 50px;
+  width: 100%;
+  margin-bottom: 50px;
+  max-height: none;
 }
 .start {
     text-align: center;

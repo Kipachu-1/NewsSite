@@ -55,7 +55,7 @@ def runthis():
                      try:       
                             models.Article.objects.create(
                             Author=article['author'], category='Science',
-                            header_image=article['urlToImage'], title=article['title'], 
+                            image_url=article['urlToImage'], title=article['title'], 
                             url=article['url']
                             )
                      except: 
@@ -65,7 +65,7 @@ def runthis():
                      try:
                             models.Article.objects.create(
                             Author=article['author'], category='Science',
-                            header_image=article['urlToImage'], title=article['title'], 
+                            image_url=article['urlToImage'], title=article['title'], 
                             url=article['url']
                             )
                      except: 
@@ -77,7 +77,7 @@ def runthis():
                             
                             models.Article.objects.create(
                             Author=article['author'], category='Technology',
-                            header_image=article['urlToImage'], title=article['title'], 
+                            image_url=article['urlToImage'], title=article['title'], 
                             url=article['url']
                             )
                             
@@ -91,7 +91,7 @@ def runthis():
 
                             models.Article.objects.create(
                             Author=article['author'], category='Space',
-                            header_image=article['urlToImage'], title=article['title'], 
+                            image_url=article['urlToImage'], title=article['title'], 
                             url=article['url']
                             )
                      except: 
@@ -103,7 +103,7 @@ def runthis():
                      try:
                             models.Article.objects.create(
                                           Author=article['author'], category='Animal',
-                                          header_image=article['urlToImage'], title=article['title'], 
+                                          image_url=article['urlToImage'], title=article['title'], 
                                           url=article['url']
                                           )
                      except: 
@@ -113,7 +113,7 @@ def runthis():
                      try:
                             models.Article.objects.create(
                                           Author=article['author'], category='Geography',
-                                          header_image=article['urlToImage'], title=article['title'], 
+                                          image_url=article['urlToImage'], title=article['title'], 
                                           url=article['url']
                                           )
                      except: 
@@ -123,20 +123,25 @@ def runthis():
                      try:
                             models.Article.objects.create(
                                           Author=article['author'], category='Health',
-                                          header_image=article['urlToImage'], title=article['title'], 
+                                          image_url=article['urlToImage'], title=article['title'], 
                                           url=article['url']
                                           )
                      except: 
                             pass
-              bad = ['Coombes', 'http']
-              for i in models.Article.objects.all():
-                     for word in bad:
-                            if word in i.Author:
-                                   i.delete()
-                     if '@' in i.Author:
-                            i.Author = 'Frank Kauper'
-                            i.save()
-              print('done')
+                     
+              print('done')   
+              
+               
+def runthis2():                 
+       bad = ['Coombes', 'http']
+       for i in models.Article.objects.all():
+              for word in bad:
+                     if word in i.Author:
+                            i.delete()
+              if '@' in i.Author:
+                     i.Author = 'Frank Kauper'
+                     i.save()
+              
                             
        from bs4 import BeautifulSoup
        for article in models.Article.objects.filter(body=None):     

@@ -31,7 +31,7 @@ class Article(models.Model):
     category = models.CharField(max_length=100)
     subtitle = models.TextField(max_length=100, null=True)
     title = models.CharField(max_length=100, unique=True)
-    body = models.TextField()
+    body = models.TextField(null=True)
     views = models.IntegerField(default=0)
     updated = models.DateTimeField(auto_now=True)
     created = models.DateTimeField(auto_now_add=True)
